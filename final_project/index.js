@@ -10,7 +10,6 @@ app.use(express.json());
 app.use(session({   
  secret: "fingerprint_customer",   
  resave: true, saveUninitialized: true }));
-app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   const token = req.headers['x-access-token'];
@@ -32,7 +31,7 @@ app.use((req, res, next) => {
   }
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 3001;
 
 app.use("/customer", customer_routes);
 app.use("/", genl_routes);   
